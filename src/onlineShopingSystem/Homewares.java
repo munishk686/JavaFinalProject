@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package onlineShopingSystem.images;
+package onlineShopingSystem;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -11,9 +11,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -21,32 +20,33 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.WindowConstants;
 
 /**
  *
  * @author munis
  */
-public class Electronics extends JFrame {
+public class Homewares extends JFrame {
 
     public static Connection conn;
-    public static String url = "jdbc:derby://localhost:1527/new1";
+    public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
     public static String username = "root";
     public static String password = "root";
+    Statement statement;
+    String tableName = "CREATE TABLE SHOPPING_CART (PRODUCTNAME VARCHAR(50), PRICE VARCHAR(20))";
+    ConnectionManage connectionManage = new ConnectionManage();
 
-    public void goBack() {
+    public void disapparWindow() {
         this.setVisible(false);
     }
 
-    public Electronics() {
+    public Homewares() {
 
-        String[] elePro = new String[3];
-        elePro[0] = "Ps4 $400";
-        elePro[1] = "Sony TV 42inch $1000";
-        elePro[2] = "Sony Soundbar $500";
+        String[] homPro = new String[3];
+        homPro[0] = "Flower vase $50";
+        homPro[1] = "Persian Rugs $500";
+        homPro[2] = "Drink bottle $10";
 
-        JList jl = new JList(elePro);
+        JList jl = new JList(homPro);
         jl.setSize(500, 100);
         jl.setLocation(100, 20);
 
@@ -60,7 +60,7 @@ public class Electronics extends JFrame {
         button2.setLocation(100, 400);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                goBack();
+                disapparWindow();
             }
         });
 
@@ -69,8 +69,12 @@ public class Electronics extends JFrame {
         button3.setLocation(800, 400);
         button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Cart cart = new Cart();
-                goBack();
+                try {
+                    Cart cart = new Cart();
+                    disapparWindow();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -78,44 +82,43 @@ public class Electronics extends JFrame {
         button.setSize(100, 30);
         button.setLocation(100, 150);
 
+        connectionManage.checkExistedTable("SHOPPING_CART");
+
         try {
             conn = DriverManager.getConnection(url, username, password);
-            Statement statement1 = conn.createStatement();
-            PreparedStatement dl = conn.prepareStatement("delete from login");
-            dl.execute();
+            statement = conn.createStatement();
+            statement.executeUpdate(tableName);
+            System.out.println("table is created");
         } catch (SQLException ex) {
             Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(url + " connected");
+
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (jl.getSelectedIndex() != -1) {
-
                     try {
-                        conn = DriverManager.getConnection(url, username, password);
-                        System.out.println(url + " connected");
-                        Statement statement = conn.createStatement();
                         String num = (String) jl.getSelectedValue();
-                        PreparedStatement ps = null;
-
-                        if (num.equals("Ps4 $400")) {
-                            ps = conn.prepareStatement("insert into login (id, password) values('Ps4' ,'400')");
-                            label2.setText("You have selected Ps4 $400");
+                        PreparedStatement psH = null;
+                        if (num.equals("Flower vase $50")) {
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Flower vase' ,'50')");
+                            label2.setText("You have selected Flower vase $50");
                         }
-                        if (num.equals("Sony TV 42inch $1000")) {
-                            ps = conn.prepareStatement("insert into login (id, password) values('Sony TV 42inch' ,'1000')");
-                            label2.setText("You have selected Sony TV 42inch $1000");
+                        if (num.equals("Persian Rugs $500")) {
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Persian Rugs' ,'500')");
+                            label2.setText("You have selected Persian Rugs $500");
                         }
-                        if (num.equals("Sony Soundbar $500")) {
-                            ps = conn.prepareStatement("insert into login (id, password) values('Sony Soundbar' ,'500')");
-                            label2.setText("You have selected Sony Soundbar $500");
+                        if (num.equals("Drink bottle $10")) {
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Drink bottle' ,'10')");
+                            label2.setText("You have selected Drink bottle $10");
                         }
 
-                        ps.executeUpdate();
-
-                        statement.close();
-                        conn.close();
+                         psH.executeUpdate();
+                         //psH.close();
+                        //statement.close();
+                        //conn.close();
                     } catch (SQLException ex) {
-                        System.out.println("connection disconnected");
+                        Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 }

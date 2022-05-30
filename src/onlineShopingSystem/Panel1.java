@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package onlineShopingSystem.images;
+package onlineShopingSystem;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
  * @author munis
  */
 public class Panel1 extends JPanel {
+    //Frame frame = new Frame();
 
     public Panel1() {
         // set Panel location and colour.
@@ -37,9 +38,13 @@ public class Panel1 extends JPanel {
         jb1.setLocation(600, 120);
         jb1.setSize(120, 50);
         jb1.setBackground(Color.LIGHT_GRAY);
+        // this.setVisible(false);
+
         jb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AllItems all = new AllItems();
+
+                //  frame.setVisible(false);
             }
 
         });
@@ -79,18 +84,36 @@ public class Panel1 extends JPanel {
         jb4.setLocation(50, 230);
         jb4.setSize(120, 50);
         jb4.setBackground(Color.LIGHT_GRAY);
+        jb4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Homewares home = new Homewares();
+            }
+
+        });
         this.add(jb4);
 
         JButton jb5 = new JButton("FURNITURE");
         jb5.setLocation(50, 290);
         jb5.setSize(120, 50);
         jb5.setBackground(Color.LIGHT_GRAY);
+        jb5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Furnitures fur = new Furnitures();
+            }
+
+        });
         this.add(jb5);
 
         JButton jb6 = new JButton("VIDEO GAMES");
         jb6.setLocation(50, 350);
         jb6.setSize(120, 50);
         jb6.setBackground(Color.LIGHT_GRAY);
+        jb6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                VideoGames fur = new VideoGames();
+            }
+
+        });
         this.add(jb6);
 
         JButton jb7 = new JButton("EXIT");
