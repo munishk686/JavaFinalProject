@@ -17,13 +17,13 @@ import java.sql.*;
  *
  * @author munish
  */
-public class ConnectionManage {
+public class ConnectionManager {
      Connection conn;
     public  String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
     public  String username = "root";
     public  String password = "root";
     
-    public ConnectionManage() {
+    public ConnectionManager() {
         NewConnection();
     }
 
@@ -33,7 +33,7 @@ public class ConnectionManage {
                 conn = DriverManager.getConnection(url, username, password);
                 System.out.println(url + " connected");
             } catch (SQLException ex) {
-                Logger.getLogger(ConnectionManage.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -41,48 +41,8 @@ public class ConnectionManage {
      public Connection getConnection() {
         return this.conn;
     }
-     
-     public void closeConnections() {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
-     
-       public ResultSet queryDB(String sql) {
-
-        Connection connection = this.conn;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return resultSet;
-    }
-    
-        public void updateDB(String sql) {
-
-        Connection connection = this.conn;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate(sql);
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-        
+           
+                  
         public void checkExistedTable(String name) {
         try {
             DatabaseMetaData dbmd = this.conn.getMetaData();

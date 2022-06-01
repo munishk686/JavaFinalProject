@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  *
  * @author munis
  */
-public class Homewares extends JFrame {
+public class Homeware extends JFrame {
 
     public static Connection conn;
     public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
@@ -33,13 +33,13 @@ public class Homewares extends JFrame {
     public static String password = "root";
     Statement statement;
     String tableName = "CREATE TABLE SHOPPING_CART (PRODUCTNAME VARCHAR(50), PRICE VARCHAR(20))";
-    ConnectionManage connectionManage = new ConnectionManage();
+    ConnectionManager connectionManage = new ConnectionManager();
 
     public void disapparWindow() {
         this.setVisible(false);
     }
 
-    public Homewares() {
+    public Homeware() {
 
         String[] homPro = new String[3];
         homPro[0] = "Flower vase $50";

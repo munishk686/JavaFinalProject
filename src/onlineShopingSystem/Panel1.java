@@ -17,7 +17,7 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author munis
+ * @author munish
  */
 public class Panel1 extends JPanel {
     //Frame frame = new Frame();
@@ -62,7 +62,7 @@ public class Panel1 extends JPanel {
         });
         this.add(jb2);
 
-        JLabel jl2 = new JLabel("CATEGERYS");
+        JLabel jl2 = new JLabel("CATEGORIES");
         jl2.setLocation(50, 120);
         jl2.setSize(150, 50);
         jl2.setFont(new Font("Helvetica", Font.BOLD, 20));
@@ -80,13 +80,13 @@ public class Panel1 extends JPanel {
         });
         this.add(jb3);
 
-        JButton jb4 = new JButton("HOWEWARES");
+        JButton jb4 = new JButton("HOWEWARE");
         jb4.setLocation(50, 230);
         jb4.setSize(120, 50);
         jb4.setBackground(Color.LIGHT_GRAY);
         jb4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Homewares home = new Homewares();
+                Homeware home = new Homeware();
             }
 
         });

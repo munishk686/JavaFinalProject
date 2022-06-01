@@ -45,7 +45,7 @@ public class AllItems extends JFrame {
             {"11", "Call of Duty:", "$70"},
             {"12", "Super Mario:", "$50"},};
 
-        String[] ProductName = {"Product Name", "Price", "asd"};
+        String[] ProductName = {"Product N0", "Product Name", "Price"};
 
         JTable jt = new JTable(data, ProductName);
         this.setSize(1000, 500);
