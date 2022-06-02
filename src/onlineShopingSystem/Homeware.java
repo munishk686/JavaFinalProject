@@ -23,9 +23,10 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author munis
+ * @author munish
+ * This class extends JFrame and implements Disappear class.
  */
-public class Homeware extends JFrame {
+public class Homeware extends JFrame implements Disappear {
 
     public static Connection conn;
     public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
@@ -35,6 +36,7 @@ public class Homeware extends JFrame {
     String tableName = "CREATE TABLE SHOPPING_CART (PRODUCTNAME VARCHAR(50), PRICE VARCHAR(20))";
     ConnectionManager connectionManage = new ConnectionManager();
 
+    @Override
     public void disapparWindow() {
         this.setVisible(false);
     }
@@ -60,6 +62,7 @@ public class Homeware extends JFrame {
         button2.setLocation(100, 400);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                  //Disappar current window.
                 disapparWindow();
             }
         });
@@ -78,10 +81,15 @@ public class Homeware extends JFrame {
             }
         });
 
+        JLabel label5 = new JLabel("Select your product to buy");
+        label5.setSize(400, 50);
+        label5.setLocation(100, 150);
+        label5.setFont(new Font("Helvetica", Font.BOLD, 20));
+
         JButton button = new JButton("BUY");
         button.setSize(100, 30);
-        button.setLocation(100, 150);
-
+        button.setLocation(500, 150);
+            // This method checks table name SHOPPING_CART.
         connectionManage.checkExistedTable("SHOPPING_CART");
 
         try {
@@ -101,22 +109,19 @@ public class Homeware extends JFrame {
                         String num = (String) jl.getSelectedValue();
                         PreparedStatement psH = null;
                         if (num.equals("Flower vase $50")) {
-                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Flower vase' ,'50')");
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Flower vase' ,'$50')");
                             label2.setText("You have selected Flower vase $50");
                         }
                         if (num.equals("Persian Rugs $500")) {
-                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Persian Rugs' ,'500')");
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Persian Rugs' ,'$500')");
                             label2.setText("You have selected Persian Rugs $500");
                         }
                         if (num.equals("Drink bottle $10")) {
-                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Drink bottle' ,'10')");
+                            psH = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Drink bottle' ,'$10')");
                             label2.setText("You have selected Drink bottle $10");
                         }
 
-                         psH.executeUpdate();
-                         //psH.close();
-                        //statement.close();
-                        //conn.close();
+                        psH.executeUpdate();
                     } catch (SQLException ex) {
                         Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -140,6 +145,7 @@ public class Homeware extends JFrame {
         jpa.add(button);
         jpa.add(button2);
         jpa.add(button3);
+        jpa.add(label5);
 
         this.add(jpa);
         this.setVisible(true);

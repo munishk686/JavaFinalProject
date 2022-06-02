@@ -28,8 +28,9 @@ import javax.swing.WindowConstants;
 /**
  *
  * @author munish
+ * This class extends JFrame and implements Disappear class.
  */
-public class Electronics extends JFrame {
+public class Electronics extends JFrame implements Disappear {
 
     public static Connection conn;
     public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
@@ -39,6 +40,7 @@ public class Electronics extends JFrame {
     String tableName = "CREATE TABLE SHOPPING_CART (PRODUCTNAME VARCHAR(50), PRICE VARCHAR(20))";
     ConnectionManager connectionManage = new ConnectionManager();
 
+    @Override
     public void disapparWindow() {
         this.setVisible(false);
     }
@@ -64,6 +66,7 @@ public class Electronics extends JFrame {
         button2.setLocation(100, 400);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //Disappar current window.
                 disapparWindow();
             }
         });
@@ -82,10 +85,15 @@ public class Electronics extends JFrame {
             }
         });
 
+        JLabel label5 = new JLabel("Select your product to buy");
+        label5.setSize(400, 50);
+        label5.setLocation(100, 150);
+        label5.setFont(new Font("Helvetica", Font.BOLD, 20));
+
         JButton button = new JButton("BUY");
         button.setSize(100, 30);
-        button.setLocation(100, 150);
-
+        button.setLocation(500, 150);
+        // This method checks table name SHOPPING_CART.
         connectionManage.checkExistedTable("SHOPPING_CART");
 
         try {
@@ -105,27 +113,23 @@ public class Electronics extends JFrame {
                         String num = (String) jl.getSelectedValue();
                         PreparedStatement ps = null;
                         if (num.equals("Ps4 $400")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Ps4' ,'400')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Ps4' ,'$400')");
                             label2.setText("You have selected Ps4 $400");
                         }
                         if (num.equals("Sony TV 42inch $1000")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Sony TV 42inch' ,'1000')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Sony TV 42inch' ,'$1000')");
                             label2.setText("You have selected Sony TV 42inch $1000");
                         }
                         if (num.equals("Sony Soundbar $500")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Sony Soundbar' ,'500')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Sony Soundbar' ,'$500')");
                             label2.setText("You have selected Sony Soundbar $500");
                         }
 
                         ps.executeUpdate();
-                      //  ps.close();
-                        //statement.close();
-                        //conn.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                   
                 }
             }
 
@@ -145,6 +149,7 @@ public class Electronics extends JFrame {
         jpa.add(button);
         jpa.add(button2);
         jpa.add(button3);
+        jpa.add(label5);
 
         this.add(jpa);
         this.setVisible(true);

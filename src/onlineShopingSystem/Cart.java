@@ -31,9 +31,10 @@ import static onlineShopingSystem.Electronics.conn;
 
 /**
  *
- * @author munish
+ * @author munish This class extends JFrame, implements Disappear and
+ * ItemListener class.
  */
-public class Cart extends JFrame implements ItemListener {
+public class Cart extends JFrame implements ItemListener, Disappear {
 
     public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
     public static String username = "root";
@@ -44,14 +45,15 @@ public class Cart extends JFrame implements ItemListener {
     JRadioButton rd2;
     JLabel jl3;
 
-    @SuppressWarnings("empty-statement")
-     public void disapparWindow() {
+    @Override
+    public void disapparWindow() {
         this.setVisible(false);
     }
 
     public Cart() throws SQLException {
 
         Connection conn;
+        //This array stores buying product heading name.
         String[] columnName = {"products", "Price"};
         DefaultTableModel model = null;
 
@@ -59,7 +61,7 @@ public class Cart extends JFrame implements ItemListener {
             conn = DriverManager.getConnection(url, username, password);
             System.out.println(url + " connected");
             Statement statement = conn.createStatement();
-
+            // Creating SQL query .
             String selectQuery = "SELECT * FROM SHOPPING_CART";
             ResultSet rs = null;
 
@@ -69,7 +71,6 @@ public class Cart extends JFrame implements ItemListener {
                 String priceReturn = rs.getString("PRICE");
 
                 Object[][] data = {{prodType, priceReturn}};
-                // model.addRow(data);
                 model = new DefaultTableModel(data, columnName);
                 System.out.println(prodType + " " + priceReturn);
             }
@@ -116,12 +117,13 @@ public class Cart extends JFrame implements ItemListener {
         jl3.setLocation(100, 350);
         jl3.setSize(300, 25);
         jl3.setFont(new Font("Helvetica", Font.BOLD, 20));
-        
-         JButton button2 = new JButton("SUBMIT");
+
+        JButton button2 = new JButton("SUBMIT");
         button2.setSize(150, 30);
         button2.setLocation(100, 400);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //Disappar current window.
                 disapparWindow();
             }
         });

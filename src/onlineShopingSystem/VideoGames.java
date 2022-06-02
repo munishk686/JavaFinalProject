@@ -24,9 +24,11 @@ import javax.swing.JPanel;
 /**
  *
  * @author munish
+ * This class extends JFrame and implements Disappear class.
  */
-public class VideoGames extends JFrame{
-     public static Connection conn;
+public class VideoGames extends JFrame implements Disappear {
+
+    public static Connection conn;
     public static String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
     public static String username = "root";
     public static String password = "root";
@@ -34,6 +36,7 @@ public class VideoGames extends JFrame{
     String tableName = "CREATE TABLE SHOPPING_CART (PRODUCTNAME VARCHAR(50), PRICE VARCHAR(20))";
     ConnectionManager connectionManage = new ConnectionManager();
 
+    @Override
     public void disapparWindow() {
         this.setVisible(false);
     }
@@ -59,6 +62,7 @@ public class VideoGames extends JFrame{
         button2.setLocation(100, 400);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                 //Disappar current window.
                 disapparWindow();
             }
         });
@@ -77,10 +81,15 @@ public class VideoGames extends JFrame{
             }
         });
 
+        JLabel label5 = new JLabel("Select your product to buy");
+        label5.setSize(400, 50);
+        label5.setLocation(100, 150);
+        label5.setFont(new Font("Helvetica", Font.BOLD, 20));
+
         JButton button = new JButton("BUY");
         button.setSize(100, 30);
-        button.setLocation(100, 150);
-
+        button.setLocation(500, 150);
+         // This method checks table name SHOPPING_CART.
         connectionManage.checkExistedTable("SHOPPING_CART");
 
         try {
@@ -100,27 +109,23 @@ public class VideoGames extends JFrame{
                         String num = (String) jl.getSelectedValue();
                         PreparedStatement ps = null;
                         if (num.equals("Minecraft $80")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Minecraft' ,'80')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Minecraft' ,'$80')");
                             label2.setText("You have selected Minecraft $80");
                         }
                         if (num.equals("Call of Duty $70")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Call of Duty' ,'70')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Call of Duty' ,'$70')");
                             label2.setText("You have selected Call of Duty $70");
                         }
                         if (num.equals("Super Mario $50")) {
-                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Super Mario' ,'50')");
+                            ps = conn.prepareStatement("insert into SHOPPING_CART (PRODUCTNAME, PRICE) values('Super Mario' ,'$50')");
                             label2.setText("You have selected Super Mario $50");
                         }
 
                         ps.executeUpdate();
-                        //ps.close();
-                        //statement.close();
-                        //conn.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(Electronics.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                   
                 }
             }
 
@@ -140,11 +145,11 @@ public class VideoGames extends JFrame{
         jpa.add(button);
         jpa.add(button2);
         jpa.add(button3);
+        jpa.add(label5);
 
         this.add(jpa);
         this.setVisible(true);
 
     }
 
-    
 }

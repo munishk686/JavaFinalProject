@@ -18,12 +18,11 @@ import javax.swing.WindowConstants;
 /**
  *
  * @author munish
+ * This is a panel of main window.
  */
 public class Panel1 extends JPanel {
-    //Frame frame = new Frame();
 
     public Panel1() {
-        // set Panel location and colour.
         this.setLayout(null);
         this.setBackground(Color.CYAN);
         this.setSize(1000, 500);
@@ -38,15 +37,11 @@ public class Panel1 extends JPanel {
         jb1.setLocation(600, 120);
         jb1.setSize(120, 50);
         jb1.setBackground(Color.LIGHT_GRAY);
-        // this.setVisible(false);
 
         jb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AllItems all = new AllItems();
-
-                //  frame.setVisible(false);
             }
-
         });
         this.add(jb1);
 
@@ -76,7 +71,6 @@ public class Panel1 extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Electronics ele = new Electronics();
             }
-
         });
         this.add(jb3);
 
@@ -88,7 +82,6 @@ public class Panel1 extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Homeware home = new Homeware();
             }
-
         });
         this.add(jb4);
 
@@ -100,7 +93,6 @@ public class Panel1 extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 Furnitures fur = new Furnitures();
             }
-
         });
         this.add(jb5);
 
@@ -112,7 +104,6 @@ public class Panel1 extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 VideoGames fur = new VideoGames();
             }
-
         });
         this.add(jb6);
 
@@ -124,8 +115,14 @@ public class Panel1 extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-
         });
+
+        ImageIcon image = new ImageIcon("online.jpg");
+        JLabel pic = new JLabel(image);
+        pic.setLocation(200, 150);
+        pic.setSize(600, 300);
+        this.add(pic);
+
         this.add(jb7);
         this.setVisible(true);
     }

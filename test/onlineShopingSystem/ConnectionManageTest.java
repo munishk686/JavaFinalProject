@@ -14,27 +14,28 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author munis
+ * @author munish
  */
 public class ConnectionManageTest {
-    private  ConnectionManager ConnectionManage;
-    
+
+    private ConnectionManager connectionManage;
+
     public ConnectionManageTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        ConnectionManage = new ConnectionManager();
+        connectionManage = new ConnectionManager();
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -43,38 +44,35 @@ public class ConnectionManageTest {
      * Test of NewConnection method, of class ConnectionManager.
      */
     @Test
-    public void testNewConnection() {
-        System.out.println("NewConnection");
-        ConnectionManager instance = new ConnectionManager();
-        instance.NewConnection();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getConnection method, of class ConnectionManager.
-     */
-    @Test
-    public void testGetConnection() {
-        System.out.println("getConnection");
+    public void testGetConnectionNull() {
+        System.out.println("checkExistedTable");
         ConnectionManager instance = new ConnectionManager();
         Connection expResult = null;
         Connection result = instance.getConnection();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
      * Test of checkExistedTable method, of class ConnectionManager.
      */
     @Test
-    public void testCheckExistedTable() {
+    public void testCheckExistedTableEqual() {
         System.out.println("checkExistedTable");
-        String name = null;
-        ConnectionManage.checkExistedTable(name);
+        connectionManage.checkExistedTable("SHOPPING_CART");
+
         // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
-    
+
+    @Test
+    public void testCheckExistedTableNotNull() {
+        System.out.println("checkExistedTable");
+        connectionManage.checkExistedTable("SHOPPING_CART");
+
+        // TODO review the generated test code and remove the default call to fail.
+        // fail("The test case is a prototype.");
+    }
+
 }

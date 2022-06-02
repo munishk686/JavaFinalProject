@@ -4,6 +4,7 @@
  */
 package onlineShopingSystem;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +23,18 @@ import javax.swing.WindowConstants;
 /**
  *
  * @author munish
+ * This class extends JFrame and implements Disappear class.
  */
-public class AllItems extends JFrame {
+public class AllItems extends JFrame implements Disappear {
 
-    public void goBack() {
+    @Override
+    public void disapparWindow() {
         this.setVisible(false);
     }
 
     public AllItems() {
-
+        
+// The 2D array variable store all the products detail.
         String[][] data = {
             {"1", "Ps4 price", "$400"},
             {"2", "Sony TV 42inch price:", "$1000"},
@@ -45,14 +49,32 @@ public class AllItems extends JFrame {
             {"11", "Call of Duty:", "$70"},
             {"12", "Super Mario:", "$50"},};
 
-        String[] ProductName = {"Product N0", "Product Name", "Price"};
+        String[] ProductName = {"Product No", "Product Name", "Price"};
 
         JTable jt = new JTable(data, ProductName);
+        JScrollPane jScrollPane = new JScrollPane(jt);
+
+        JPanel jpanel1 = new JPanel();
+        jpanel1.setBackground(Color.red);
+        jpanel1.add(jScrollPane);
+
+        JButton button2 = new JButton("GO TO MAIN PAGE");
+        button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Disappar current window.
+                disapparWindow();
+            }
+        });
+
+        JPanel jpanel2 = new JPanel();
+        jpanel2.setBackground(Color.cyan);
+        jpanel2.add(button2);
+
         this.setSize(1000, 500);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-        this.add(new JScrollPane(jt));
+        this.add(jpanel1, BorderLayout.CENTER);
+        this.add(jpanel2, BorderLayout.PAGE_END);
 
         this.setVisible(true);
 

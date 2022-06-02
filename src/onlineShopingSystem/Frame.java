@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 /**
  *
  * @author munish
+ * This class is frame of main class.
  */
 public class Frame extends JFrame {
 
@@ -24,7 +25,6 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.add(jp);
-              
 
     }
 

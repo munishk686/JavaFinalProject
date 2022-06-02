@@ -15,20 +15,21 @@ import java.sql.*;
 
 /**
  *
- * @author munish
+ * @author munish This class manage all the connections.
  */
 public class ConnectionManager {
-     Connection conn;
-    public  String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
-    public  String username = "root";
-    public  String password = "root";
-    
+
+    Connection conn;
+    public String url = "jdbc:derby:ShoppingDB_Ebd; create=true";
+    public String username = "root";
+    public String password = "root";
+
     public ConnectionManager() {
         NewConnection();
     }
 
     public void NewConnection() {
-         if (this.conn == null) {
+        if (this.conn == null) {
             try {
                 conn = DriverManager.getConnection(url, username, password);
                 System.out.println(url + " connected");
@@ -37,13 +38,13 @@ public class ConnectionManager {
             }
         }
     }
-    
-     public Connection getConnection() {
+
+    public Connection getConnection() {
         return this.conn;
     }
-           
-                  
-        public void checkExistedTable(String name) {
+
+    // This methode check existing table if table existed methode deletes the table.               
+    public void checkExistedTable(String name) {
         try {
             DatabaseMetaData dbmd = this.conn.getMetaData();
             String[] types = {"TABLE"};
